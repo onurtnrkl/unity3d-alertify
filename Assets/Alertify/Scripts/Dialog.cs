@@ -20,9 +20,6 @@ namespace Alertify
             {
                 instance = this;
             }
-
-			//FIXME: DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
-			DontDestroyOnLoad(gameObject);
         }
 
         public static void Alert(string dialog, UnityAction ok)
