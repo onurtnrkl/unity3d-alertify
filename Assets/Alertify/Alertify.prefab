@@ -109,6 +109,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224979007904153900}
+  - component: {fileID: 114211592524307018}
   m_Layer: 5
   m_Name: Alertify
   m_TagString: Untagged
@@ -292,7 +293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1269637564599954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed94aeda421c7e40b33515a27ed9917, type: 3}
+  m_Script: {fileID: 11500000, guid: c748408fa5cdb40d8933b7beb1159a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114053279069684906
@@ -394,6 +395,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Enter text...
+--- !u!114 &114211592524307018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275839416588756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e4a8018fc144d769903333dfecffc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114280702412318448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,7 +645,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1464274030776118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1f8fd22d09331458f3e521a60493a4, type: 3}
+  m_Script: {fileID: 11500000, guid: cfa726a6caf5d4f459798921647bd917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114684798255240806

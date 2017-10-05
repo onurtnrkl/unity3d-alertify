@@ -8,14 +8,15 @@ namespace Alertify
         private static Notification instance;
 
         private Pool pool;
+        private Settings settings;
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
-
-                pool = new Pool(transform, 10);
+               
+                pool = new Pool(transform, Settings.GetPoolSize());
             }
             else
             {
@@ -37,28 +38,28 @@ namespace Alertify
 
         public static void Message(string message)
         {
-            IEnumerator notify = instance.Notify(message, Color.gray);
+            IEnumerator notify = instance.Notify(message, Settings.GetMessageColor());
 
             instance.StartCoroutine(notify);
         }
 
         public static void Success(string message)
         {
-            IEnumerator notify = instance.Notify(message, Color.green);
+            IEnumerator notify = instance.Notify(message, Settings.GetSuccessColor());
 
             instance.StartCoroutine(notify);
         }
 
         public static void Error(string message)
         {
-            IEnumerator notify = instance.Notify(message, Color.red);
+            IEnumerator notify = instance.Notify(message, Settings.GetErrorColor());
 
             instance.StartCoroutine(notify);
         }
 
         public static void Warning(string message)
         {
-            IEnumerator notify = instance.Notify(message, Color.yellow);
+            IEnumerator notify = instance.Notify(message, Settings.GetWarningColor());
 
             instance.StartCoroutine(notify);
         }
