@@ -8,15 +8,16 @@ namespace Alertify
         private static Notification instance;
 
         private Pool pool;
-        private Settings settings;
+        private NotificationSettings settings;
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
-               
-                pool = new Pool(transform, Settings.GetPoolSize());
+
+                settings = Resources.Load<NotificationSettings>("NotificationSettings");
+                pool = new Pool(transform, settings.PoolSize);
             }
             else
             {
@@ -27,39 +28,40 @@ namespace Alertify
         IEnumerator Notify(string message, Color color)
         {
             Notify notify = pool.GetNotify();
+            float duration = settings.Duration;
 
             notify.SetText(message);
             notify.SetColor(color);
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(duration);
 
             pool.AddNotify(notify);
         }
 
         public static void Message(string message)
         {
-            IEnumerator notify = instance.Notify(message, Settings.GetMessageColor());
+            IEnumerator notify = instance.Notify(message, instance.settings.MessageColor);
 
             instance.StartCoroutine(notify);
         }
 
         public static void Success(string message)
         {
-            IEnumerator notify = instance.Notify(message, Settings.GetSuccessColor());
+            IEnumerator notify = instance.Notify(message, instance.settings.SuccessColor);
 
             instance.StartCoroutine(notify);
         }
 
         public static void Error(string message)
         {
-            IEnumerator notify = instance.Notify(message, Settings.GetErrorColor());
+            IEnumerator notify = instance.Notify(message, instance.settings.ErrorColor);
 
             instance.StartCoroutine(notify);
         }
 
         public static void Warning(string message)
         {
-            IEnumerator notify = instance.Notify(message, Settings.GetWarningColor());
+            IEnumerator notify = instance.Notify(message, instance.settings.WarningColor);
 
             instance.StartCoroutine(notify);
         }

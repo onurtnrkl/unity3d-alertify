@@ -6,15 +6,13 @@ using UnityEngine;
 namespace Alertify
 {
     [CustomEditor(typeof(Settings))] 
-	public sealed class SettingsEditor : Editor
+	public class SettingsEditor : Editor
 	{
-        private Settings instance;
-
 		public override void OnInspectorGUI()
 		{
-            instance = (Settings)target;
+            Settings settings = (Settings)target;
 
-			SetupUI();
+			//SetupUI();
 		}
 
         private void SetupUI()

@@ -12,42 +12,73 @@ namespace Alertify
 #endif
 
     public class Settings : ScriptableObject
-	{
-		const string settingsAssetName = "AlertifySettings";
-		const string settingsPath = "Alertify/Resources";
-		const string settingsAssetExtension = ".asset";
+    {
+        private const string folderPath = "Alertify/Resources";
+        private const string assetExtension = ".asset";
 
-		private static Settings instance;
+        /*
+        private void Awake()
+        {
+            Debug.Log("I am awake!");
+            Settings settings = Resources.Load("AlertifySettings") as Settings;
 
-		static Settings Instance
-		{
-			get
-			{
-				if (instance == null)
-				{
-					instance = Resources.Load("AlertifySettings") as Settings;
-
-					if (instance == null)
-					{
-						// If not found, autocreate the asset object.
-						instance = CreateInstance<Settings>();
+            if (settings == null)
+            {
 #if UNITY_EDITOR
-                        string path = Path.Combine(Path.Combine("Assets", settingsPath),
-                                                   settingsAssetName + settingsAssetExtension
-													  );
-						AssetDatabase.CreateAsset(instance, path);
+                Debug.LogFormat("Asset Path: {0}", GetAssetPath(settingsAssetName));
+                CreateAsset();
 #endif
-					}
-				}
-				return instance;
-			}
+            }
+        }
+        */
+
+        protected void CreateAsset()
+        {
+            Settings settings = CreateInstance<Settings>();
+			string path = GetAssetPath("AlertifySettings");
+
+			AssetDatabase.CreateAsset(settings, path);
 		}
 
+        private static string GetAssetPath(string name)
+        {
+            string folder = Path.Combine("Assets", folderPath);
+            string file = name + assetExtension;
+            string path = Path.Combine(folder, file);
+
+            return path;
+        }
+
 #if UNITY_EDITOR
+        [MenuItem("Alertify/Setup")]
+        public static void Setup()
+        {
+			Settings settings = CreateInstance<Settings>();
+            string settingsPath = GetAssetPath("AlertifySettings");
+            bool fileExists = File.Exists(settingsPath);
+
+            if(fileExists)
+            {
+                Debug.LogWarningFormat("Alertify already setup.");
+            }
+            else
+            {
+                NotificationSettings notificationSettings = CreateInstance<NotificationSettings>();
+                DialogSettings dialogSettings = CreateInstance<DialogSettings>();
+
+                string notificationPath = GetAssetPath("Notification");
+                string dialogPath = GetAssetPath("Dialog");
+
+                AssetDatabase.CreateAsset(settings, settingsPath);
+                AssetDatabase.CreateAsset(notificationSettings, notificationPath);
+                AssetDatabase.CreateAsset(dialogSettings, dialogPath);
+            }			
+        }
+
 		[MenuItem("Alertify/Edit Settings")]
 		public static void Edit()
 		{
-            Selection.activeObject = Instance;
+            Selection.activeObject = Resources.Load("AlertifySettings") as Settings;
 		}
 
 		[MenuItem("Alertify/GitHub Page")]
@@ -57,44 +88,6 @@ namespace Alertify
 			Application.OpenURL(url);
 		}
 #endif
-        [SerializeField]
-        public byte PoolSize;
 
-        [SerializeField]
-        public Color MessageColor;
-
-        [SerializeField]
-        public Color SuccessColor;
-
-        [SerializeField]
-        public Color ErrorColor;
-
-        [SerializeField]
-        public Color WarningColor;
-
-        public static byte GetPoolSize()
-        {
-            return Instance.PoolSize;
-        }
-
-        public static Color GetMessageColor()
-        {
-            return Instance.MessageColor;
-        }
-
-		public static Color GetSuccessColor()
-		{
-            return Instance.SuccessColor;
-		}
-
-		public static Color GetErrorColor()
-		{
-            return Instance.ErrorColor;
-		}
-
-		public static Color GetWarningColor()
-		{
-            return Instance.WarningColor;
-		}
 	}
 }
