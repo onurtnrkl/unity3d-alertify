@@ -4,13 +4,8 @@ namespace Alertify
 {
     public sealed class NotificationSettings : Settings
 	{
-        private void Awake()
-        {
-            
-        }
-
 		[SerializeField]
-		public byte PoolSize;
+		public int PoolSize;
 
 		[SerializeField]
 		public float Duration;

@@ -16,6 +16,6 @@ public class Test : MonoBehaviour
 {
     private void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(()=>Notification.Success("Test"));   
+        GetComponent<Button>().onClick.AddListener(()=>Notification.Warning("Seni seviyorum."));   
     }
 }

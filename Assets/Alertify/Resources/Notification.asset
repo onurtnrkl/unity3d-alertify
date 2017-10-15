@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503a551c3c56e4e8c81d46745aa820c2, type: 3}
   m_Name: Notification
   m_EditorClassIdentifier: 
-  PoolSize: 0
-  Duration: 0
+  PoolSize: 15
+  Duration: 10
   MessageColor: {r: 0, g: 0, b: 0, a: 0}
   SuccessColor: {r: 0, g: 0, b: 0, a: 0}
   ErrorColor: {r: 0, g: 0, b: 0, a: 0}

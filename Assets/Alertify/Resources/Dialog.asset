@@ -11,3 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f174a8334db5945c1bc455ecca33bab6, type: 3}
   m_Name: Dialog
   m_EditorClassIdentifier: 
+  OkColor: {r: 0, g: 0, b: 0, a: 0}
+  CancelColor: {r: 0, g: 0, b: 0, a: 0}

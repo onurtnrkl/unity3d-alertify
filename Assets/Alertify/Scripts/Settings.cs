@@ -16,30 +16,6 @@ namespace Alertify
         private const string folderPath = "Alertify/Resources";
         private const string assetExtension = ".asset";
 
-        /*
-        private void Awake()
-        {
-            Debug.Log("I am awake!");
-            Settings settings = Resources.Load("AlertifySettings") as Settings;
-
-            if (settings == null)
-            {
-#if UNITY_EDITOR
-                Debug.LogFormat("Asset Path: {0}", GetAssetPath(settingsAssetName));
-                CreateAsset();
-#endif
-            }
-        }
-        */
-
-        protected void CreateAsset()
-        {
-            Settings settings = CreateInstance<Settings>();
-			string path = GetAssetPath("AlertifySettings");
-
-			AssetDatabase.CreateAsset(settings, path);
-		}
-
         private static string GetAssetPath(string name)
         {
             string folder = Path.Combine("Assets", folderPath);
@@ -53,7 +29,6 @@ namespace Alertify
         [MenuItem("Alertify/Setup")]
         public static void Setup()
         {
-			Settings settings = CreateInstance<Settings>();
             string settingsPath = GetAssetPath("AlertifySettings");
             bool fileExists = File.Exists(settingsPath);
 
@@ -63,6 +38,7 @@ namespace Alertify
             }
             else
             {
+                Settings settings = CreateInstance<Settings>();
                 NotificationSettings notificationSettings = CreateInstance<NotificationSettings>();
                 DialogSettings dialogSettings = CreateInstance<DialogSettings>();
 

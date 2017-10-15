@@ -8,7 +8,7 @@ namespace Alertify
         private readonly GameObject prefab;
         private readonly Queue<Notify> objects;
 
-        public Pool(Transform parent, ushort amount)
+        public Pool(Transform parent, int amount)
         {
             prefab = Resources.Load<GameObject>("Prefabs/Notify");
             objects = new Queue<Notify>();
