@@ -10,16 +10,21 @@ namespace Alertify
 	{
         private static Dialog instance;
 
+        private Prompt prompt;
+
         private void Awake()
         {
-            if(instance != null && instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                instance = this;
-            }
+			if (instance == null)
+			{
+				instance = this;
+
+                //TODO:Make this class like manager. Because monobehaviour is not working while object is not actived. 
+				prompt = GetComponent<Prompt>();
+			}
+			else
+			{
+				Destroy(gameObject);
+			}
         }
 
         public static void Alert(string dialog, UnityAction ok)
@@ -34,7 +39,8 @@ namespace Alertify
 
         public static void Prompt(string dialog, UnityAction ok, UnityAction cancel)
         {
-            
+            if (instance == null) Debug.Log("instance null");
+            instance.prompt.Enable(dialog, ok, cancel);
         }
     }   
 }

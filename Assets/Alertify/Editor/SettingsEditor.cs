@@ -70,6 +70,10 @@ namespace Alertify
 			EditorGUILayout.LabelField("Warning Color", EditorStyles.label);
             notificationSettings.WarningColor = EditorGUILayout.ColorField(notificationSettings.WarningColor);
 			EditorGUILayout.EndHorizontal();
+
+            //TODO: Settings to need add:
+            //Text settings
+            //
         }
 
         private void SetupDialogUI()

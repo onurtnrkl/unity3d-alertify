@@ -16,6 +16,14 @@ public class Test : MonoBehaviour
 {
     private void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(()=>Notification.Warning("Seni seviyorum."));   
+        GetComponent<Button>().onClick.AddListener(OnClickButton);   
+    }
+
+    private void OnClickButton()
+    {
+        Dialog.Prompt("Yazı gir buraya!",
+                      ()=>Notification.Success("You clicked ok!"),
+                      () => Notification.Error("You clicked cancel!")
+                     );
     }
 }
