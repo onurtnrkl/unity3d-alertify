@@ -22,8 +22,13 @@ public class Test : MonoBehaviour
     private void OnClickButton()
     {
         Dialog.Prompt("Yazı gir buraya!",
-                      ()=>Notification.Success("You clicked ok!"),
+                      OnClickOk,
                       () => Notification.Error("You clicked cancel!")
                      );
+    }
+
+    private void OnClickOk(string input)
+    {
+        Notification.Success("You clicked: " + input);
     }
 }

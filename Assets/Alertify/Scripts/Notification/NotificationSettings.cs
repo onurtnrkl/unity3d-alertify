@@ -1,25 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Alertify
 {
-    public sealed class NotificationSettings : Settings
+    [Serializable]
+    public sealed class NotificationSettings
 	{
-		[SerializeField]
 		public int PoolSize;
-
-		[SerializeField]
 		public float Duration;
-
-		[SerializeField]
 		public Color MessageColor;
-
-		[SerializeField]
 		public Color SuccessColor;
-
-		[SerializeField]
 		public Color ErrorColor;
-
-		[SerializeField]
 		public Color WarningColor;
+
+        public NotificationSettings()
+        {
+            PoolSize = 10;
+            Duration = 2.5f;
+            MessageColor = Color.blue;
+            SuccessColor = Color.green;
+            ErrorColor = Color.red;
+            WarningColor = Color.yellow;
+        }
 	}
 }

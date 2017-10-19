@@ -16,7 +16,7 @@ namespace Alertify
             {
                 instance = this;
 
-                settings = Resources.Load<NotificationSettings>("Notification");
+                settings = Resources.Load<Settings>("AlertifySettings").NotificationSettings;
                 pool = new Pool(transform, settings.PoolSize);
             }
             else

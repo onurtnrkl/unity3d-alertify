@@ -2,8 +2,10 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Prompt : MonoBehaviour 
+public sealed class DialogBox : MonoBehaviour 
 {
+    [SerializeField]
+    private Text dialog;
     [SerializeField]
     private InputField inputField;
     [SerializeField]

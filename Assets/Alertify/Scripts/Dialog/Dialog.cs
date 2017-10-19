@@ -19,7 +19,7 @@ namespace Alertify
 				instance = this;
 
                 //TODO:Make this class like manager. Because monobehaviour is not working while object is not actived. 
-				prompt = GetComponent<Prompt>();
+				prompt = GetComponentInChildren<Prompt>();
 			}
 			else
 			{
@@ -37,10 +37,19 @@ namespace Alertify
             
         }
 
-        public static void Prompt(string dialog, UnityAction ok, UnityAction cancel)
+        public static void Prompt(string dialog, UnityAction<string> ok, UnityAction cancel)
         {
-            if (instance == null) Debug.Log("instance null");
+            if (instance == null)
+            {
+                Debug.Log("null");
+                return;
+            }
             instance.prompt.Enable(dialog, ok, cancel);
+        }
+
+        public static void Prompt(string dialog, UnityAction<string> ok)
+        {
+            
         }
     }   
 }

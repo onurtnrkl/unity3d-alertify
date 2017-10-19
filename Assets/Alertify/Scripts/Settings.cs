@@ -13,49 +13,29 @@ namespace Alertify
 
     public class Settings : ScriptableObject
     {
-        private const string folderPath = "Alertify/Resources";
-        private const string assetExtension = ".asset";
-
-        private static string GetAssetPath(string name)
-        {
-            string folder = Path.Combine("Assets", folderPath);
-            string file = name + assetExtension;
-            string path = Path.Combine(folder, file);
-
-            return path;
-        }
+        public NotificationSettings NotificationSettings;
+        public DialogSettings DialogSettings;
 
 #if UNITY_EDITOR
-        [MenuItem("Alertify/Setup")]
-        public static void Setup()
+        private static void CreateAsset()
         {
-            string settingsPath = GetAssetPath("AlertifySettings");
-            bool fileExists = File.Exists(settingsPath);
+            Settings settings = CreateInstance<Settings>();
+            string folder = Path.Combine("Assets", "Alertify/Resources");
+            string file = "AlertifySettings.asset";
+            string path = Path.Combine(folder, file);
 
-            if(fileExists)
-            {
-                Debug.LogWarningFormat("Alertify already setup.");
-            }
-            else
-            {
-                Settings settings = CreateInstance<Settings>();
-                NotificationSettings notificationSettings = CreateInstance<NotificationSettings>();
-                DialogSettings dialogSettings = CreateInstance<DialogSettings>();
-
-                string notificationPath = GetAssetPath("Notification");
-                string dialogPath = GetAssetPath("Dialog");
-
-                AssetDatabase.CreateAsset(settings, settingsPath);
-                AssetDatabase.CreateAsset(notificationSettings, notificationPath);
-                AssetDatabase.CreateAsset(dialogSettings, dialogPath);
-            }			
+            AssetDatabase.CreateAsset(settings, path);
         }
 
-		[MenuItem("Alertify/Edit Settings")]
+        [MenuItem("Alertify/Edit Settings")]
 		public static void Edit()
 		{
-            Selection.activeObject = Resources.Load("AlertifySettings") as Settings;
-		}
+            Settings settings = Resources.Load("AlertifySettings") as Settings;
+
+            if (settings == null) CreateAsset();
+
+            Selection.activeObject = settings;
+        }
 
 		[MenuItem("Alertify/GitHub Page")]
 		public static void OpenGitHub()
@@ -63,7 +43,6 @@ namespace Alertify
 			string url = "https://github.com/onurtnrkl/unity3d-alertify";
 			Application.OpenURL(url);
 		}
-#endif
-
 	}
+#endif
 }

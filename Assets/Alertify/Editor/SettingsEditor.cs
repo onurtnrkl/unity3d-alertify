@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace Alertify
@@ -8,13 +6,11 @@ namespace Alertify
     [CustomEditor(typeof(Settings))]
     public class SettingsEditor : Editor
 	{
-        private NotificationSettings notificationSettings;
-        private DialogSettings dialogSettings;
+        private Settings settings;
 
         private void OnEnable()
         {
-            notificationSettings = Resources.Load<NotificationSettings>("Notification");
-            dialogSettings = Resources.Load<DialogSettings>("Dialog");
+            settings = Resources.Load<Settings>("AlertifySettings");
         }
 
         public override void OnInspectorGUI()
@@ -32,53 +28,70 @@ namespace Alertify
         {
             SetupNotificationUI();
             EditorGUILayout.Space();
-
+            SetupDialogUI();
         }
 
         private void SetupNotificationUI()
         {
+            NotificationSettings settings = this.settings.NotificationSettings;
+
 			EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Notification Settings", EditorStyles.boldLabel);
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("Pool Size", EditorStyles.label);
-            notificationSettings.PoolSize = EditorGUILayout.IntSlider(notificationSettings.PoolSize, 1, 20);
+            settings.PoolSize = EditorGUILayout.IntSlider(settings.PoolSize, 1, 20);
 			EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Duration", EditorStyles.label);
-            notificationSettings.Duration = EditorGUILayout.Slider(notificationSettings.Duration, 0.1f, 10f);
+            settings.Duration = EditorGUILayout.Slider(settings.Duration, 0.1f, 10f);
             EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("Message Color", EditorStyles.label);
-            notificationSettings.MessageColor = EditorGUILayout.ColorField(notificationSettings.MessageColor);
+            settings.MessageColor = EditorGUILayout.ColorField(settings.MessageColor);
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("Success Color", EditorStyles.label);
-            notificationSettings.SuccessColor = EditorGUILayout.ColorField(notificationSettings.SuccessColor);
+            settings.SuccessColor = EditorGUILayout.ColorField(settings.SuccessColor);
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("Error Color", EditorStyles.label);
-            notificationSettings.ErrorColor = EditorGUILayout.ColorField(notificationSettings.ErrorColor);
+            settings.ErrorColor = EditorGUILayout.ColorField(settings.ErrorColor);
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("Warning Color", EditorStyles.label);
-            notificationSettings.WarningColor = EditorGUILayout.ColorField(notificationSettings.WarningColor);
+            settings.WarningColor = EditorGUILayout.ColorField(settings.WarningColor);
 			EditorGUILayout.EndHorizontal();
-
-            //TODO: Settings to need add:
-            //Text settings
-            //
         }
 
         private void SetupDialogUI()
         {
-            
+            DialogSettings settings = this.settings.DialogSettings;
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Dialog Settings", EditorStyles.boldLabel);
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Box Width", EditorStyles.label);
+            settings.BoxWidth = EditorGUILayout.Slider(settings.BoxWidth, 1, 5);
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("OK Color", EditorStyles.label);
+            settings.OkColor = EditorGUILayout.ColorField(settings.OkColor);
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Cancel Color", EditorStyles.label);
+            settings.CancelColor = EditorGUILayout.ColorField(settings.CancelColor);
+            EditorGUILayout.EndHorizontal();
         }
 	}   
 }

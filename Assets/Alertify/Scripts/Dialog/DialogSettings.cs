@@ -1,15 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace Alertify
 {
-    public sealed class DialogSettings : Settings
+    [Serializable]
+    public sealed class DialogSettings
 	{
-        [SerializeField]
+        public float BoxWidth;
         public Color OkColor;
-
-        [SerializeField]
         public Color CancelColor;
+
+        public DialogSettings()
+        {
+            BoxWidth = 5f;
+            OkColor = Color.green;
+            CancelColor = Color.red;
+        }
 	}
 }
