@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace Alertify
 {
@@ -10,7 +7,8 @@ namespace Alertify
 	{
         private static Dialog instance;
 
-        private Prompt prompt;
+        //private DialogSettings settings;
+        private DialogElement element;
 
         private void Awake()
         {
@@ -18,13 +16,21 @@ namespace Alertify
 			{
 				instance = this;
 
-                //TODO:Make this class like manager. Because monobehaviour is not working while object is not actived. 
-				prompt = GetComponentInChildren<Prompt>();
+                Init();
 			}
 			else
 			{
 				Destroy(gameObject);
 			}
+        }
+
+
+        private void Init()
+        {
+            //settings = Settings.Instance.DialogSettings;
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/DialogElement");
+
+            element = Instantiate(prefab, transform).GetComponent<DialogElement>();
         }
 
         public static void Alert(string dialog, UnityAction ok)
@@ -44,7 +50,7 @@ namespace Alertify
                 Debug.Log("null");
                 return;
             }
-            instance.prompt.Enable(dialog, ok, cancel);
+            //instance.prompt.Enable(dialog, ok, cancel);
         }
 
         public static void Prompt(string dialog, UnityAction<string> ok)

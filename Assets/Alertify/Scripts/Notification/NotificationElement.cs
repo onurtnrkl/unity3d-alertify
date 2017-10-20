@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace Alertify
 {
-    public sealed class Notify : MonoBehaviour
+    public sealed class NotificationElement : MonoBehaviour
     {
         private Image image;
         private Text text;

@@ -2,8 +2,10 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Prompt : MonoBehaviour 
+public sealed class DialogElement : MonoBehaviour
 {
+    [SerializeField]
+    private Text dialog;
     [SerializeField]
     private InputField inputField;
     [SerializeField]
@@ -17,7 +19,7 @@ public class Prompt : MonoBehaviour
         if (onClickCancel == null) Debug.Log("onClickCancel null");
 
         inputField.transform.GetChild(0).GetComponent<Text>().text = dialog;
-        okButton.onClick.AddListener(()=>onClickOk(inputField.text));
+        okButton.onClick.AddListener(() => onClickOk(inputField.text));
         okButton.onClick.AddListener(Disable);
         cancelButton.onClick.AddListener(onClickCancel);
         cancelButton.onClick.AddListener(Disable);

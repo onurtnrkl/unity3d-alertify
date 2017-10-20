@@ -6,34 +6,34 @@ namespace Alertify
     public sealed class Pool
     {
         private readonly GameObject prefab;
-        private readonly Queue<Notify> objects;
+        private readonly Queue<NotificationElement> objects;
 
         public Pool(Transform parent, int amount)
         {
-            prefab = Resources.Load<GameObject>("Prefabs/Notify");
-            objects = new Queue<Notify>();
+            prefab = Resources.Load<GameObject>("Prefabs/NotificationElement");
+            objects = new Queue<NotificationElement>();
 
             for (ushort i = 0; i < amount; i++)
             {
-                Notify notify = Object.Instantiate(prefab, parent).GetComponent<Notify>();
+                NotificationElement notify = Object.Instantiate(prefab, parent).GetComponent<NotificationElement>();
 
-                AddNotify(notify);
+                AddElement(notify);
             }
         }
 
-        public Notify GetNotify()
+        public NotificationElement GetElement()
         {
-            Notify notify = objects.Dequeue();
+            NotificationElement notify = objects.Dequeue();
 
             notify.FadeIn();
 
             return notify;
         }
 
-        public void AddNotify(Notify notify)
+        public void AddElement(NotificationElement element)
         {
-            notify.FadeOut();
-            objects.Enqueue(notify);
+            element.FadeOut();
+            objects.Enqueue(element);
         }
     }
 }

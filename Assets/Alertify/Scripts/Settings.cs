@@ -16,33 +16,35 @@ namespace Alertify
         public NotificationSettings NotificationSettings;
         public DialogSettings DialogSettings;
 
-#if UNITY_EDITOR
-        private static void CreateAsset()
+        private static Settings instance;
+
+        public static Settings Instance
         {
-            Settings settings = CreateInstance<Settings>();
-            string folder = Path.Combine("Assets", "Alertify/Resources");
-            string file = "AlertifySettings.asset";
-            string path = Path.Combine(folder, file);
+            get
+            {
+                if (instance == null)
+                {
+                    Settings settings = Resources.Load("AlertifySettings") as Settings;
 
-            AssetDatabase.CreateAsset(settings, path);
+                    if (settings == null)
+                    {
+                        settings = CreateInstance<Settings>();
+
+                        if (Application.isEditor)
+                        {
+                            string folder = Path.Combine("Assets", "Alertify/Resources");
+                            string file = "AlertifySettings.asset";
+                            string path = Path.Combine(folder, file);
+
+                            AssetDatabase.CreateAsset(settings, path);
+                        }
+                    }
+
+                    instance = settings;
+                }
+
+                return instance;
+            }
         }
-
-        [MenuItem("Alertify/Edit Settings")]
-		public static void Edit()
-		{
-            Settings settings = Resources.Load("AlertifySettings") as Settings;
-
-            if (settings == null) CreateAsset();
-
-            Selection.activeObject = settings;
-        }
-
-		[MenuItem("Alertify/GitHub Page")]
-		public static void OpenGitHub()
-		{
-			string url = "https://github.com/onurtnrkl/unity3d-alertify";
-			Application.OpenURL(url);
-		}
-	}
-#endif
+    }
 }

@@ -16,8 +16,7 @@ namespace Alertify
             {
                 instance = this;
 
-                settings = Resources.Load<Settings>("AlertifySettings").NotificationSettings;
-                pool = new Pool(transform, settings.PoolSize);
+                Init();
             }
             else
             {
@@ -25,17 +24,23 @@ namespace Alertify
             }
         }
 
+        private void Init()
+        {
+            settings = Settings.Instance.NotificationSettings;
+            pool = new Pool(transform, settings.PoolSize);
+        }
+
         IEnumerator Notify(string message, Color color)
         {
-            Notify notify = pool.GetNotify();
+            NotificationElement element = pool.GetElement();
             float duration = settings.Duration;
 
-            notify.SetText(message);
-            notify.SetColor(color);
+            element.SetText(message);
+            element.SetColor(color);
 
             yield return new WaitForSeconds(duration);
 
-            pool.AddNotify(notify);
+            pool.AddElement(element);
         }
 
         public static void Message(string message)
