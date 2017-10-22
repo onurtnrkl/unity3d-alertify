@@ -3,16 +3,10 @@ using UnityEngine.UI;
 
 namespace Alertify
 {
-    public sealed class NotificationElement : MonoBehaviour
+    public sealed class NotificationElement : Element
     {
-        private Image image;
-        private Text text;
-
-        private void Awake()
-        {
-            image = GetComponent<Image>();
-            text = GetComponentInChildren<Text>();
-        }
+        [SerializeField] private Image image;
+        [SerializeField] private Text text;
 
         public void SetColor(Color color)
         {
@@ -22,16 +16,6 @@ namespace Alertify
         public void SetText(string text)
         {
             this.text.text = text;
-        }
-
-        public void FadeIn()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void FadeOut()
-        {
-            gameObject.SetActive(false);
         }
     }
 }

@@ -30,14 +30,13 @@ namespace Alertify
                     {
                         settings = CreateInstance<Settings>();
 
-                        if (Application.isEditor)
-                        {
-                            string folder = Path.Combine("Assets", "Alertify/Resources");
-                            string file = "AlertifySettings.asset";
-                            string path = Path.Combine(folder, file);
+#if UNITY_EDITOR
+                        string folder = Path.Combine("Assets", "Alertify/Resources");
+                        string file = "AlertifySettings.asset";
+                        string path = Path.Combine(folder, file);
 
-                            AssetDatabase.CreateAsset(settings, path);
-                        }
+                        AssetDatabase.CreateAsset(settings, path);
+#endif
                     }
 
                     instance = settings;

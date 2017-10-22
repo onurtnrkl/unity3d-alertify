@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Alertify
 {
     public sealed class Dialog : MonoBehaviour
-	{
+    {
         private static Dialog instance;
 
         //private DialogSettings settings;
@@ -12,16 +12,16 @@ namespace Alertify
 
         private void Awake()
         {
-			if (instance == null)
-			{
-				instance = this;
+            if (instance == null)
+            {
+                instance = this;
 
                 Init();
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
 
@@ -35,12 +35,17 @@ namespace Alertify
 
         public static void Alert(string dialog, UnityAction ok)
         {
-            
+            instance.element.EnableDialog(dialog);
+            instance.element.EnableOkButton(ok);
+            instance.element.FadeIn();
         }
 
         public static void Confirm(string dialog, UnityAction ok, UnityAction cancel)
         {
-            
+            instance.element.EnableDialog(dialog);
+            instance.element.EnableOkButton(ok);
+            instance.element.EnableCancelButton(cancel);
+            instance.element.FadeIn();
         }
 
         public static void Prompt(string dialog, UnityAction<string> ok, UnityAction cancel)
@@ -48,12 +53,14 @@ namespace Alertify
             instance.element.EnableInputField(dialog);
             instance.element.EnableOkButton(ok);
             instance.element.EnableCancelButton(cancel);
-            instance.element.gameObject.SetActive(true);
+            instance.element.FadeIn();
         }
 
         public static void Prompt(string dialog, UnityAction<string> ok)
         {
-            
+            instance.element.EnableInputField(dialog);
+            instance.element.EnableOkButton(ok);
+            instance.element.FadeIn();
         }
-    }   
+    }
 }
