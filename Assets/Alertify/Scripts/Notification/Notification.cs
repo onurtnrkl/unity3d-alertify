@@ -30,12 +30,12 @@ namespace Alertify
             pool = new NotificationPool(transform, settings.PoolSize);
         }
 
-        IEnumerator Notify(string message, Color color)
+        IEnumerator Notify(string text, Color color)
         {
             NotificationElement element = pool.GetElement();
             float duration = settings.Duration;
 
-            element.SetText(message);
+            element.SetText(text);
             element.SetColor(color);
 
             yield return new WaitForSeconds(duration);
@@ -43,30 +43,46 @@ namespace Alertify
             pool.AddElement(element);
         }
 
-        public static void Message(string message)
+        /// <summary>
+        /// Creates notification with message color.
+        /// </summary>
+        /// <param name="text">Message text.</param>
+        public static void Message(string text)
         {
-            IEnumerator notify = instance.Notify(message, instance.settings.MessageColor);
+            IEnumerator notify = instance.Notify(text, instance.settings.MessageColor);
 
             instance.StartCoroutine(notify);
         }
 
-        public static void Success(string message)
+        /// <summary>
+        /// Creates notification with success color.
+        /// </summary>
+        /// <param name="text">Message text.</param>
+        public static void Success(string text)
         {
-            IEnumerator notify = instance.Notify(message, instance.settings.SuccessColor);
+            IEnumerator notify = instance.Notify(text, instance.settings.SuccessColor);
 
             instance.StartCoroutine(notify);
         }
 
-        public static void Error(string message)
+        /// <summary>
+        /// Creates notification with error color.
+        /// </summary>
+        /// <param name="text">Message text.</param>
+        public static void Error(string text)
         {
-            IEnumerator notify = instance.Notify(message, instance.settings.ErrorColor);
+            IEnumerator notify = instance.Notify(text, instance.settings.ErrorColor);
 
             instance.StartCoroutine(notify);
         }
 
-        public static void Warning(string message)
+        /// <summary>
+        /// Creates notification with warning color.
+        /// </summary>
+        /// <param name="text">Message text.</param>
+        public static void Warning(string text)
         {
-            IEnumerator notify = instance.Notify(message, instance.settings.WarningColor);
+            IEnumerator notify = instance.Notify(text, instance.settings.WarningColor);
 
             instance.StartCoroutine(notify);
         }

@@ -5,13 +5,13 @@ namespace Alertify
 {
     [Serializable]
     public sealed class NotificationSettings
-	{
-		public int PoolSize;
-		public float Duration;
-		public Color MessageColor;
-		public Color SuccessColor;
-		public Color ErrorColor;
-		public Color WarningColor;
+    {
+        public int PoolSize;
+        public float Duration;
+        public Color MessageColor;
+        public Color SuccessColor;
+        public Color ErrorColor;
+        public Color WarningColor;
 
         public NotificationSettings()
         {
@@ -22,5 +22,5 @@ namespace Alertify
             ErrorColor = Color.red;
             WarningColor = Color.yellow;
         }
-	}
+    }
 }

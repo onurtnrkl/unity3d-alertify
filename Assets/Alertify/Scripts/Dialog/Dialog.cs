@@ -33,39 +33,61 @@ namespace Alertify
             element = Instantiate(prefab, transform).GetComponent<DialogElement>();
         }
 
-        public static void Alert(string dialog, UnityAction ok)
+        /// <summary>
+        /// Creates alert window.
+        /// </summary>
+        /// <param name="text">Dialog text.</param>
+        /// <param name="onClickOk">On click ok button.</param>
+        public static void Alert(string text, UnityAction onClickOk)
         {
-            ok += () => instance.element.FadeOut();
-            instance.element.EnableDialog(dialog);
-            instance.element.EnableOkButton(ok);
+            onClickOk += () => instance.element.FadeOut();
+            instance.element.EnableDialog(text);
+            instance.element.EnableOkButton(onClickOk);
             instance.element.FadeIn();
         }
 
-        public static void Confirm(string dialog, UnityAction ok, UnityAction cancel)
+        /// <summary>
+        /// Creates Confirm window.
+        /// </summary>
+        /// <param name="text">Dialog text.</param>
+        /// <param name="onClickOk">On click ok button.</param>
+        /// <param name="onClickCancel">On click cancel button.</param>
+        public static void Confirm(string text, UnityAction onClickOk, UnityAction onClickCancel)
         {
-            ok += () => instance.element.FadeOut();
-            cancel += () => instance.element.FadeOut();
-            instance.element.EnableDialog(dialog);
-            instance.element.EnableOkButton(ok);
-            instance.element.EnableCancelButton(cancel);
+            onClickOk += () => instance.element.FadeOut();
+            onClickCancel += () => instance.element.FadeOut();
+            instance.element.EnableDialog(text);
+            instance.element.EnableOkButton(onClickOk);
+            instance.element.EnableCancelButton(onClickCancel);
             instance.element.FadeIn();
         }
 
-        public static void Prompt(string dialog, UnityAction<string> ok, UnityAction cancel)
+        /// <summary>
+        /// Creates Prompt Window.
+        /// </summary>
+        /// <param name="text">Dialog text.</param>
+        /// <param name="onClickOk">On click ok button.</param>
+        /// <param name="onClickCancel">On click cancel button.</param>
+        public static void Prompt(string text, UnityAction<string> onClickOk, UnityAction onClickCancel)
         {
-            ok += (string input) => instance.element.FadeOut();
-            cancel += () => instance.element.FadeOut();
-            instance.element.EnableInputField(dialog);
-            instance.element.EnableOkButton(ok);
-            instance.element.EnableCancelButton(cancel);
+            onClickOk += (string input) => instance.element.FadeOut();
+            onClickCancel += () => instance.element.FadeOut();
+            instance.element.EnableInputField(text);
+            instance.element.EnableOkButton(onClickOk);
+            instance.element.EnableCancelButton(onClickCancel);
             instance.element.FadeIn();
         }
 
-        public static void Prompt(string dialog, UnityAction<string> ok)
+        /// <summary>
+        /// Creates Prompt Window.
+        /// </summary>
+        /// <param name="text">Dialog text.</param>
+        /// <param name="onClickOk">On click ok button.</param>
+        public static void Prompt(string text, UnityAction<string> onCickOk)
         {
-            ok += (string input) => instance.element.FadeOut();
-            instance.element.EnableInputField(dialog);
-            instance.element.EnableOkButton(ok);
+            onCickOk += (string input) => instance.element.FadeOut();
+            instance.element.EnableInputField(text);
+            instance.element.EnableOkButton(onCickOk);
             instance.element.FadeIn();
         }
     }
