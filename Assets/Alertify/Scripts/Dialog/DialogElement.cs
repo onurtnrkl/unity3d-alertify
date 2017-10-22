@@ -4,37 +4,64 @@ using UnityEngine.UI;
 
 public sealed class DialogElement : MonoBehaviour
 {
-    [SerializeField]
-    private Text dialog;
-    [SerializeField]
-    private InputField inputField;
-    [SerializeField]
-    private Button okButton;
-    [SerializeField]
-    private Button cancelButton;
+    [SerializeField] private Text dialog;
+    [SerializeField] private InputField inputField;
+    [SerializeField] private Text placeholderDialog;
+    [SerializeField] private Button ok;
+    [SerializeField] private Button cancel;
 
-    public void Enable(string dialog, UnityAction<string> onClickOk, UnityAction onClickCancel)
+    private string InputValue
     {
-        if (onClickOk == null) Debug.Log("onClickOk null");
-        if (onClickCancel == null) Debug.Log("onClickCancel null");
-
-        inputField.transform.GetChild(0).GetComponent<Text>().text = dialog;
-        okButton.onClick.AddListener(() => onClickOk(inputField.text));
-        okButton.onClick.AddListener(Disable);
-        cancelButton.onClick.AddListener(onClickCancel);
-        cancelButton.onClick.AddListener(Disable);
-        inputField.gameObject.SetActive(true);
-        okButton.gameObject.SetActive(true);
-        cancelButton.gameObject.SetActive(true);
-        //TODO: Opening animation
-        gameObject.SetActive(true);
+        get { return inputField.text; }
     }
 
-    private void Disable()
+    /// <summary>
+    /// Enables the dialog text.
+    /// </summary>
+    /// <param name="text">Dialog text.</param>
+    public void EnableDialog(string text)
     {
-        okButton.onClick.RemoveAllListeners();
-        cancelButton.onClick.RemoveAllListeners();
-        //TODO: Closing animation
-        gameObject.SetActive(false);
+        dialog.text = text;
+        dialog.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Enables the input field.
+    /// </summary>
+    /// <param name="text">Placeholder dialog text.</param>
+    public void EnableInputField(string text)
+    {
+        placeholderDialog.text = text;
+        inputField.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Enables the ok button
+    /// </summary>
+    /// <param name="onClickOk">On click button action.</param>
+    public void EnableOkButton(UnityAction onClickOk)
+    {
+        ok.onClick.AddListener(onClickOk);
+        ok.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Enables the ok button
+    /// </summary>
+    /// <param name="onClickOk">On click button action for the input field.</param>
+    public void EnableOkButton(UnityAction<string> onClickOk)
+    {
+        ok.onClick.AddListener(() => onClickOk(InputValue));
+        ok.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Enables the cancel button.
+    /// </summary>
+    /// <param name="onClickCancel">On click cancel button action.</param>
+    public void EnableCancelButton(UnityAction onClickCancel)
+    {
+        cancel.onClick.AddListener(onClickCancel);
+        cancel.gameObject.SetActive(true);
     }
 }

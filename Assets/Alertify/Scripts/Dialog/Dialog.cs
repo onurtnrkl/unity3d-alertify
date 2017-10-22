@@ -45,12 +45,10 @@ namespace Alertify
 
         public static void Prompt(string dialog, UnityAction<string> ok, UnityAction cancel)
         {
-            if (instance == null)
-            {
-                Debug.Log("null");
-                return;
-            }
-            //instance.prompt.Enable(dialog, ok, cancel);
+            instance.element.EnableInputField(dialog);
+            instance.element.EnableOkButton(ok);
+            instance.element.EnableCancelButton(cancel);
+            instance.element.gameObject.SetActive(true);
         }
 
         public static void Prompt(string dialog, UnityAction<string> ok)

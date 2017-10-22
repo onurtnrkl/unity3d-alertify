@@ -7,7 +7,7 @@ namespace Alertify
 	{
         private static Notification instance;
 
-        private Pool pool;
+        private NotificationPool pool;
         private NotificationSettings settings;
 
         private void Awake()
@@ -27,7 +27,7 @@ namespace Alertify
         private void Init()
         {
             settings = Settings.Instance.NotificationSettings;
-            pool = new Pool(transform, settings.PoolSize);
+            pool = new NotificationPool(transform, settings.PoolSize);
         }
 
         IEnumerator Notify(string message, Color color)

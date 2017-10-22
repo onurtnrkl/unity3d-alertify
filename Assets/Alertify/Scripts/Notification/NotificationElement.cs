@@ -1,14 +1,4 @@
-﻿#region License
-/*================================================================
-Product:    #PRODUCTNAME#
-Developer:  #DEVELOPERNAME#
-Date:       #DATE#
-
-Copyright (c) #YEAR# #COMPANYNAME#. All rights reserved.
-================================================================*/
-#endregion
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Alertify

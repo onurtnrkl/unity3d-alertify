@@ -23,12 +23,12 @@ public class Test : MonoBehaviour
     {
         Dialog.Prompt("Yazı gir buraya!",
                       OnClickOk,
-                      () => Notification.Error("You clicked cancel!")
+                      () => Notification.Error("Error!")
                      );
     }
 
     private void OnClickOk(string input)
     {
-        Notification.Success("You clicked: " + input);
+        Notification.Success("Success: " + input);
     }
 }
