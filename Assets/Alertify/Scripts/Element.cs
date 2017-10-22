@@ -10,7 +10,7 @@ namespace Alertify
             gameObject.SetActive(true);
         }
 
-        public void FadeOut()
+        public virtual void FadeOut()
         {
             //TODO: Add fade out animation.
             gameObject.SetActive(false);

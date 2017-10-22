@@ -17,6 +17,16 @@ namespace Alertify
             get { return inputField.text; }
         }
 
+        public override void FadeOut()
+        {
+            base.FadeOut();
+
+            dialog.gameObject.SetActive(false);
+            inputField.gameObject.SetActive(false);
+            ok.gameObject.SetActive(false);
+            cancel.gameObject.SetActive(false);
+        }
+
         /// <summary>
         /// Enables the dialog text.
         /// </summary>
@@ -33,6 +43,7 @@ namespace Alertify
         /// <param name="text">Placeholder dialog text.</param>
         public void EnableInputField(string text)
         {
+            inputField.text = string.Empty;
             placeholderDialog.text = text;
             inputField.gameObject.SetActive(true);
         }
@@ -43,6 +54,7 @@ namespace Alertify
         /// <param name="onClickOk">On click button action.</param>
         public void EnableOkButton(UnityAction onClickOk)
         {
+            ok.onClick.RemoveAllListeners();
             ok.onClick.AddListener(onClickOk);
             ok.gameObject.SetActive(true);
         }
@@ -53,6 +65,7 @@ namespace Alertify
         /// <param name="onClickOk">On click button action for the input field.</param>
         public void EnableOkButton(UnityAction<string> onClickOk)
         {
+            ok.onClick.RemoveAllListeners();
             ok.onClick.AddListener(() => onClickOk(InputValue));
             ok.gameObject.SetActive(true);
         }
@@ -63,6 +76,7 @@ namespace Alertify
         /// <param name="onClickCancel">On click cancel button action.</param>
         public void EnableCancelButton(UnityAction onClickCancel)
         {
+            cancel.onClick.RemoveAllListeners();
             cancel.onClick.AddListener(onClickCancel);
             cancel.gameObject.SetActive(true);
         }
