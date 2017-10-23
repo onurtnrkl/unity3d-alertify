@@ -24,22 +24,19 @@ namespace Alertify
             {
                 if (instance == null)
                 {
-                    Settings settings = Resources.Load("AlertifySettings") as Settings;
+                    instance = Resources.Load("AlertifySettings") as Settings;
 
-                    if (settings == null)
+                    if (instance == null)
                     {
-                        settings = CreateInstance<Settings>();
-
+                        instance = CreateInstance<Settings>();
 #if UNITY_EDITOR
                         string folder = Path.Combine("Assets", "Alertify/Resources");
-                        string file = "AlertifySettings.asset";
+                        const string file = "AlertifySettings.asset";
                         string path = Path.Combine(folder, file);
 
-                        AssetDatabase.CreateAsset(settings, path);
+                        AssetDatabase.CreateAsset(instance, path);
 #endif
                     }
-
-                    instance = settings;
                 }
 
                 return instance;

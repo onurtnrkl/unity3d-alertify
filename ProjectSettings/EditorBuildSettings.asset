@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Alertify/Example.unity
+    path: Assets/Alertify/Example/Example.unity
     guid: 8abf46c2cf3524ff09428876ff0a39db

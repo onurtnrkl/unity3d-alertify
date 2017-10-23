@@ -27,8 +27,8 @@ namespace Alertify
         private GameObject LoadAsset(string name)
         {
             const string folder = "Assets/Alertify/Resources/Prefabs";
-            const string extension = ".prefab";
-            string path = Path.Combine(folder, name + extension);
+            string file = name + ".prefab";
+            string path = Path.Combine(folder, file);
             GameObject asset = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
             return asset;
@@ -46,12 +46,8 @@ namespace Alertify
 		{
             Settings settings = (Settings)target;
 
-            serializedObject.Update();
-
             SetupUI();
-
-            serializedObject.ApplyModifiedProperties();
-		}
+        }
 
         private void SetupUI()
         {
