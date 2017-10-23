@@ -44,9 +44,12 @@ namespace Alertify
 
         public override void OnInspectorGUI()
 		{
-            Settings settings = (Settings)target;
-
             SetupUI();
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(target);
+            }
         }
 
         private void SetupUI()
